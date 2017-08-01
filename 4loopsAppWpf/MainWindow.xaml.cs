@@ -18,6 +18,9 @@ namespace _4loopsAppWpf {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
+        ReadWrite readWrite = new ReadWrite();
+        
         public MainWindow() {
             InitializeComponent();
         }
@@ -44,8 +47,6 @@ namespace _4loopsAppWpf {
             Random rand = new Random();
             HashSet<string> randString = new HashSet<string>();
             
-
-
             //on each unique char loop all strings on given string
             //ie. if "testi" will be 5 chars so it will be 4*3*2*1
             while(uniqCharCount > 0) {
@@ -82,12 +83,14 @@ namespace _4loopsAppWpf {
                         textBox1.AppendText(Environment.NewLine);
                         linecount = 0;
                     }
+
                 }
 
             } while(randString.Count < totalCount);
 
             //add number how many unique strings comes from given output
             textBlock.Text = totalCount.ToString();
+            readWrite.Write(readWrite.FilePath, textBox1.Text);
         }
 
         
@@ -103,6 +106,13 @@ namespace _4loopsAppWpf {
 
             if(textBox.Text == "") {
                 textBox.Text = "Anna sana";
+            }
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e) {
+            if(checkBox.IsChecked == true) {
+                readWrite.WriteToFile = true;
+                readWrite.FilePath = @"C:\Temp\write.txt";
             }
         }
     }
