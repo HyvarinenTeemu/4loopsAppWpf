@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
 using System.Windows;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace _4loopsAppWpf {
     public class ReadWrite {
@@ -29,11 +31,13 @@ namespace _4loopsAppWpf {
 
         public string FilePath { get; set; }
 
+        public string FileXmlPath { get; set; }
+
         public void Write(string write, string text) {
             
             if(canWrite == true) {
                 if(File.Exists(FilePath)) {
-                    MessageBoxResult result = MessageBox.Show("Kirjoita tiedostoon pointcollege", "Tiedosto " + FilePath + " on olemassa. Ylikirjoitetaanko?", MessageBoxButton.YesNo);
+                    MessageBoxResult result = MessageBox.Show("Tiedosto " + FilePath + " on olemassa. Ylikirjoitetaanko?", "Kirjoita tiedostoon pointcollege",  MessageBoxButton.YesNo);
 
                     if(result == MessageBoxResult.Yes) {
                         File.WriteAllText(FilePath, text);
@@ -49,6 +53,15 @@ namespace _4loopsAppWpf {
 
         public void Read() {
             text.Text = File.ReadAllText(FilePath);
+        }
+
+        public void ReadXML() {
+            XDocument doc = XDocument.Load(FileXmlPath);
+            IEnumerable<XElement> wholeStory = doc.Elements();
+
+            foreach(var allElements in wholeStory) {
+                text.Text = allElements.ToString();
+            }
         }
 
     }
