@@ -11,7 +11,8 @@
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Sana" VerticalAlignment="Top" Width="120" Margin="138,17,0,0" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="258" TextWrapping="Wrap" VerticalAlignment="Top" Width="479" Margin="10,51,0,0"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Margin="277,19,0,0"/>
-        <CheckBox x:Name="checkBox" Content="Kirjoita tiedostoon" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox_Checked"/>
+        <CheckBox x:Name="checkBox" Content="Kirjoita tiedostoon" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
+        <CheckBox x:Name="checkBox1" Content="Lue tiedostosta" HorizontalAlignment="Left" Margin="320,30,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox1_Checked" Unchecked="checkBox1_Unchecked"/>
 
     </Grid>
 </Window>
