@@ -14,6 +14,7 @@
         <CheckBox x:Name="checkBox" Content="Kirjoita teksti / xml" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
         <CheckBox x:Name="checkBox1" Content="Lue tiedostosta" HorizontalAlignment="Left" Margin="320,30,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox1_Checked" Unchecked="checkBox1_Unchecked"/>
         <CheckBox x:Name="checkBox2" Content="Lue XML tiedosto" HorizontalAlignment="Left" Margin="320,50,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox2_Checked" Unchecked="checkBox2_Unchecked"/>
+        <CheckBox x:Name="checkBox3" Content="Lue Json tiedosto" HorizontalAlignment="Left" Margin="320,70,0,0" VerticalAlignment="Top" Width="139" Checked="checkBox3_Checked" Unchecked="checkBox3_Unchecked"/>
 
     </Grid>
 </Window>

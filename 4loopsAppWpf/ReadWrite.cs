@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Xml.Linq;
 using System.Xml;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace _4loopsAppWpf {
     public class ReadWrite {
@@ -32,6 +34,8 @@ namespace _4loopsAppWpf {
         public string FilePath { get; set; }
 
         public string FileXmlPath { get; set; }
+
+        public string FileJsonPath { get; set; }
 
         public void Write(string write, string text) {
             
@@ -104,5 +108,18 @@ namespace _4loopsAppWpf {
             } 
         }
 
+        public void WriteJson(HashSet<string> randString) {
+           
+            JArray array = new JArray();
+
+            foreach(var str in randString) {
+                array.Add(str);
+            }
+
+            JObject obj = new JObject();
+            obj["stringarray"] = array;
+
+            File.WriteAllText(FileJsonPath, obj.ToString());
+        }
     }
 }

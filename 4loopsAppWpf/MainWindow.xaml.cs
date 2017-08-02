@@ -26,6 +26,7 @@ namespace _4loopsAppWpf {
             readWrite = new ReadWrite(textBox1);
             readWrite.FilePath = @"C:\Temp\write.txt";
             readWrite.FileXmlPath = @"c:\Temp\xmldocs.xml";
+            readWrite.FileJsonPath = @"c:\Temp\jsondocs.txt";
         }
 
         private void button_Click(object sender, RoutedEventArgs e) {
@@ -36,6 +37,8 @@ namespace _4loopsAppWpf {
 
             } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled) {
                 readWrite.ReadXML();
+            } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled && !checkBox2.IsEnabled) {
+                       
             } else {
             
                 //at first delete any content before starting new one
@@ -106,7 +109,9 @@ namespace _4loopsAppWpf {
 
                 //create and write xml from output
                 readWrite.WriteXML(randString);
-                
+
+                //write json
+                readWrite.WriteJson(randString);
             }
         }
           
@@ -127,6 +132,7 @@ namespace _4loopsAppWpf {
         private void checkBox_Checked(object sender, RoutedEventArgs e) {
             checkBox1.IsEnabled = false;
             checkBox2.IsEnabled = false;
+            checkBox3.IsEnabled = false;
             readWrite.WriteToFile = true;
         }
 
@@ -134,6 +140,7 @@ namespace _4loopsAppWpf {
         private void checkBox_Unchecked(object sender, RoutedEventArgs e) {
             checkBox1.IsEnabled = true;
             checkBox2.IsEnabled = true;
+            checkBox3.IsEnabled = true;
             readWrite.WriteToFile = false;
         }
 
@@ -141,24 +148,42 @@ namespace _4loopsAppWpf {
             checkBox.IsEnabled = false;
             checkBox2.IsEnabled = false;
             textBox.IsEnabled = false;
+            checkBox3.IsEnabled = false;
             textBox1.Text = "";
         }
 
         private void checkBox1_Unchecked(object sender, RoutedEventArgs e) {
             checkBox.IsEnabled = true;
             checkBox2.IsEnabled = true;
+            checkBox3.IsEnabled = true;
             textBox.IsEnabled = true;
         }
 
         private void checkBox2_Checked(object sender, RoutedEventArgs e) {
             checkBox.IsEnabled = false;
             checkBox1.IsEnabled = false;
+            checkBox3.IsEnabled = false;
             textBox.IsEnabled = false;
         }
 
         private void checkBox2_Unchecked(object sender, RoutedEventArgs e) {
             checkBox.IsEnabled = true;
             checkBox1.IsEnabled = true;
+            checkBox3.IsEnabled = true;
+            textBox.IsEnabled = true;
+        }
+
+        private void checkBox3_Checked(object sender, RoutedEventArgs e) {
+            checkBox.IsEnabled = false;
+            checkBox1.IsEnabled = false;
+            checkBox2.IsEnabled = false;
+            textBox.IsEnabled = false;
+        }
+
+        private void checkBox3_Unchecked(object sender, RoutedEventArgs e) {
+            checkBox.IsEnabled = true;
+            checkBox1.IsEnabled = true;
+            checkBox2.IsEnabled = true;
             textBox.IsEnabled = true;
         }
     }
