@@ -64,5 +64,26 @@ namespace _4loopsAppWpf {
             }
         }
 
+        //creates and writes xml file from given string
+        public void WriteXML(HashSet<string> randString) {
+
+            //create new xml file
+            XDocument doc = new XDocument();
+
+            //create root element
+            XElement xRoot = new XElement("root");
+            doc.Add(xRoot);
+
+            //loop hashset strings and add each string in new element
+            foreach(var str in randString) {
+                XElement ele = new XElement("string",
+                               new XElement("newstring", str));
+                xRoot.Add(ele);
+            }
+
+            //save xml file
+            doc.Save(FileXmlPath);
+        }
+
     }
 }

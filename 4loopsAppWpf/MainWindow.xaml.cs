@@ -71,7 +71,6 @@ namespace _4loopsAppWpf {
 
                         //add new string to SET ( set is holding only unique strings so it will not output same string twice
                         randString.Add(builder.ToString());
-
                     }
 
                     uniqCharCount--;
@@ -101,7 +100,12 @@ namespace _4loopsAppWpf {
 
                 //add number how many unique strings comes from given output
                 textBlock.Text = totalCount.ToString();
+
+                //write output to txt file
                 readWrite.Write(readWrite.FilePath, textBox1.Text);
+
+                //create and write xml from output
+                readWrite.WriteXML(randString);
             }
         }
           
