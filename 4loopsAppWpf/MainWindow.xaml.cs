@@ -106,6 +106,7 @@ namespace _4loopsAppWpf {
 
                 //create and write xml from output
                 readWrite.WriteXML(randString);
+                
             }
         }
           
@@ -132,6 +133,7 @@ namespace _4loopsAppWpf {
         //if not checked then just ignore writing
         private void checkBox_Unchecked(object sender, RoutedEventArgs e) {
             checkBox1.IsEnabled = true;
+            checkBox2.IsEnabled = true;
             readWrite.WriteToFile = false;
         }
 

@@ -55,34 +55,53 @@ namespace _4loopsAppWpf {
             text.Text = File.ReadAllText(FilePath);
         }
 
+        //parse xml data to stringbuilder and then output text
         public void ReadXML() {
-            XDocument doc = XDocument.Load(FileXmlPath);
-            IEnumerable<XElement> wholeStory = doc.Elements();
+            StringBuilder build = new StringBuilder();
+            XmlTextReader reader = new XmlTextReader(FileXmlPath);
 
-            foreach(var allElements in wholeStory) {
-                text.Text = allElements.ToString();
+            while(reader.Read()) {
+                switch(reader.NodeType) {
+                    case XmlNodeType.Element:
+                        build.Append(reader.Value + "\n");
+                    break;
+                    case XmlNodeType.Text:
+                        build.Append(reader.Value);
+                    break;
+                }
             }
+
+            text.Text = build.ToString();
         }
 
         //creates and writes xml file from given string
         public void WriteXML(HashSet<string> randString) {
 
-            //create new xml file
-            XDocument doc = new XDocument();
+            if(canWrite == true) {
+                if(File.Exists(FileXmlPath)) {
+                    MessageBoxResult result = MessageBox.Show("Tiedosto " + FileXmlPath + " on olemassa. Ylikirjoitetaanko?", "Kirjoita tiedostoon pointcollege", MessageBoxButton.YesNo);
 
-            //create root element
-            XElement xRoot = new XElement("root");
-            doc.Add(xRoot);
+                    if(result == MessageBoxResult.Yes) {
+                        //create new xml file
+                        XDocument doc = new XDocument();
 
-            //loop hashset strings and add each string in new element
-            foreach(var str in randString) {
-                XElement ele = new XElement("string",
-                               new XElement("newstring", str));
-                xRoot.Add(ele);
-            }
+                        //create root element
+                        XElement xRoot = new XElement("root");
+                        doc.Add(xRoot);
 
-            //save xml file
-            doc.Save(FileXmlPath);
+                        //loop hashset strings and add each string in new element
+                        foreach(var str in randString) {
+                            XElement ele = new XElement("string", str);
+                            xRoot.Add(ele);
+                        }
+
+                        //save xml file
+                        doc.Save(FileXmlPath);
+                    } else {
+                        return;
+                    }
+                }
+            } 
         }
 
     }
