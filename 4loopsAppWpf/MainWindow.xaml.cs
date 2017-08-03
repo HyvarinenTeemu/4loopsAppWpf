@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,25 +21,26 @@ namespace _4loopsAppWpf {
     public partial class MainWindow : Window {
 
         ReadWrite readWrite;
+        string filename;
 
         public MainWindow() {
             InitializeComponent();
-            readWrite = new ReadWrite(textBox1);
+            
+            readWrite = new ReadWrite(textBox1, textBox, textBox2, checkBox, checkBox1, checkBox2, checkBox3, button);
             readWrite.FilePath = @"C:\Temp\write.txt";
             readWrite.FileXmlPath = @"c:\Temp\xmldocs.xml";
-            readWrite.FileJsonPath = @"c:\Temp\jsondocs.txt";
+            readWrite.FileJsonPath = @"c:\Temp\jsondocs.json";
         }
 
         private void button_Click(object sender, RoutedEventArgs e) {
 
             //read from file if checkbox for write is disabled
-            if(!checkBox.IsEnabled && !checkBox2.IsEnabled) {
+            if(!checkBox.IsEnabled && !checkBox2.IsEnabled && !checkBox3.IsEnabled) {
                 readWrite.Read();
-
-            } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled) {
+            } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled && !checkBox3.IsEnabled) {
                 readWrite.ReadXML();
             } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled && !checkBox2.IsEnabled) {
-                       
+                readWrite.ReadJson();
             } else {
             
                 //at first delete any content before starting new one
@@ -185,6 +187,35 @@ namespace _4loopsAppWpf {
             checkBox1.IsEnabled = true;
             checkBox2.IsEnabled = true;
             textBox.IsEnabled = true;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.DefaultExt = ".txt";
+            dialog.Filter = "txt file (*.txt) |*.txt| XML files (*.xml)|*.xml| Json Files (*.json)|*.json";
+
+            Nullable<bool> result = dialog.ShowDialog();
+
+            //if correct extension is selected file name will be added to textbox
+            //and all other components will be disabled for that time
+            if(result == true) {
+                filename = dialog.FileName;
+                textBox2.Text = filename;
+
+                button.IsEnabled = false;
+                textBox.IsEnabled = false;
+                textBox1.IsEnabled = false;
+                checkBox.IsEnabled = false;
+                checkBox1.IsEnabled = false;
+                checkBox2.IsEnabled = false;
+                checkBox3.IsEnabled = false;
+                
+            }
+        }
+
+        private void button2_Click(object sender, RoutedEventArgs e) {
+            readWrite.ReadFromLocation(filename);
         }
     }
 }

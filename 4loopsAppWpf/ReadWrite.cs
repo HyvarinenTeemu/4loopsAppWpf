@@ -14,7 +14,9 @@ using Newtonsoft.Json;
 namespace _4loopsAppWpf {
     public class ReadWrite {
 
-        TextBox text;
+        TextBox text, textbox, textBox2;
+        CheckBox checkBox, checkBox1, checkBox2, checkBox3, button;
+        Button but;
 
         private bool canWrite = false;
 
@@ -27,8 +29,16 @@ namespace _4loopsAppWpf {
             }
         }
 
-        public ReadWrite(TextBox text) {
+        public ReadWrite(TextBox text, TextBox textBox, TextBox textBox2, CheckBox checkBox, CheckBox checkBox1,
+                        CheckBox checkBox2, CheckBox checkBox3, Button button) {
             this.text = text;
+            this.textbox = textBox;
+            this.textBox2 = textBox2;
+            this.checkBox = checkBox;
+            this.checkBox1 = checkBox1;
+            this.checkBox2 = checkBox2;
+            this.checkBox3 = checkBox3;
+            this.but = button;
         }
 
         public string FilePath { get; set; }
@@ -120,6 +130,65 @@ namespace _4loopsAppWpf {
             obj["stringarray"] = array;
 
             File.WriteAllText(FileJsonPath, obj.ToString());
+        }
+
+
+        //reads from json
+        public void ReadJson() {
+            StreamReader reader = new StreamReader(FileJsonPath);
+
+            string json = reader.ReadToEnd();
+            dynamic array = JsonConvert.DeserializeObject(json);
+
+            foreach(var item in array) {
+                text.Text = (string)item.ToString();
+            }
+        }
+
+        public void ReadFromLocation(string filename) {
+            string extension = Path.GetExtension(filename);
+
+            if(extension == ".txt") {
+                text.Text = File.ReadAllText(filename);
+
+            } else if(extension == ".xml") {
+                StringBuilder build = new StringBuilder();
+                XmlTextReader reader = new XmlTextReader(filename);
+
+                while(reader.Read()) {
+                    switch(reader.NodeType) {
+                        case XmlNodeType.Element:
+                            build.Append(reader.Value + "\n");
+                            break;
+                        case XmlNodeType.Text:
+                            build.Append(reader.Value);
+                            break;
+                    }
+                }
+
+                text.Text = build.ToString();
+
+            } else if(extension == ".json") {
+
+                StreamReader reader = File.OpenText(filename);
+
+                //read from file
+                JsonTextReader read = new JsonTextReader(reader);
+                read.SupportMultipleContent = true;
+                JObject obj = (JObject)JToken.ReadFrom(read);
+                text.Text = (string)obj.ToString();
+                Console.WriteLine(obj.ToString());
+            }
+
+            but.IsEnabled = true;
+            text.IsEnabled = true;
+            textbox.IsEnabled = true;
+            textBox2.IsEnabled = true;
+            checkBox.IsEnabled = true;
+            checkBox1.IsEnabled = true;
+            checkBox2.IsEnabled = true;
+            checkBox3.IsEnabled = true;
+            
         }
     }
 }
