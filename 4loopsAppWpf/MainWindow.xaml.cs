@@ -135,6 +135,8 @@ namespace _4loopsAppWpf {
             checkBox1.IsEnabled = false;
             checkBox2.IsEnabled = false;
             checkBox3.IsEnabled = false;
+            button1.IsEnabled = false;
+            button2.IsEnabled = false;
             readWrite.WriteToFile = true;
         }
 
@@ -143,6 +145,8 @@ namespace _4loopsAppWpf {
             checkBox1.IsEnabled = true;
             checkBox2.IsEnabled = true;
             checkBox3.IsEnabled = true;
+            button1.IsEnabled = true;
+            button2.IsEnabled = true;
             readWrite.WriteToFile = false;
         }
 
@@ -151,6 +155,8 @@ namespace _4loopsAppWpf {
             checkBox2.IsEnabled = false;
             textBox.IsEnabled = false;
             checkBox3.IsEnabled = false;
+            button1.IsEnabled = false;
+            button2.IsEnabled = false;
             textBox1.Text = "";
         }
 
@@ -158,6 +164,8 @@ namespace _4loopsAppWpf {
             checkBox.IsEnabled = true;
             checkBox2.IsEnabled = true;
             checkBox3.IsEnabled = true;
+            button1.IsEnabled = true;
+            button2.IsEnabled = true;
             textBox.IsEnabled = true;
         }
 
@@ -165,6 +173,8 @@ namespace _4loopsAppWpf {
             checkBox.IsEnabled = false;
             checkBox1.IsEnabled = false;
             checkBox3.IsEnabled = false;
+            button1.IsEnabled = false;
+            button2.IsEnabled = false;
             textBox.IsEnabled = false;
         }
 
@@ -172,6 +182,8 @@ namespace _4loopsAppWpf {
             checkBox.IsEnabled = true;
             checkBox1.IsEnabled = true;
             checkBox3.IsEnabled = true;
+            button1.IsEnabled = true;
+            button2.IsEnabled = true;
             textBox.IsEnabled = true;
         }
 
@@ -179,6 +191,8 @@ namespace _4loopsAppWpf {
             checkBox.IsEnabled = false;
             checkBox1.IsEnabled = false;
             checkBox2.IsEnabled = false;
+            button1.IsEnabled = false;
+            button2.IsEnabled = false;
             textBox.IsEnabled = false;
         }
 
@@ -186,6 +200,8 @@ namespace _4loopsAppWpf {
             checkBox.IsEnabled = true;
             checkBox1.IsEnabled = true;
             checkBox2.IsEnabled = true;
+            button1.IsEnabled = true;
+            button2.IsEnabled = true;
             textBox.IsEnabled = true;
         }
 

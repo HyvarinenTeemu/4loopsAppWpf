@@ -17,7 +17,7 @@
         <Button x:Name="button1" Content="Selaa" HorizontalAlignment="Left" Margin="320,106,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
         <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="138,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
         <Button x:Name="button2" Content="Lue" HorizontalAlignment="Left" Margin="20,68,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="190" Margin="10,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="263" Margin="10,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
 
     </Grid>
 </Window>

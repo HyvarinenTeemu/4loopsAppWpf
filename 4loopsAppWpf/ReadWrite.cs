@@ -66,55 +66,73 @@ namespace _4loopsAppWpf {
         }
 
         public void Read() {
-            text.Text = File.ReadAllText(FilePath);
+            try {
+                text.Text = File.ReadAllText(FilePath);
+            } catch (FileNotFoundException e) {
+                MessageBox.Show("Tiedosto ei löytynyt: " + FilePath);
+            }
+            
         }
 
         //parse xml data to stringbuilder and then output text
         public void ReadXML() {
-            StringBuilder build = new StringBuilder();
-            XmlTextReader reader = new XmlTextReader(FileXmlPath);
 
-            while(reader.Read()) {
-                switch(reader.NodeType) {
-                    case XmlNodeType.Element:
-                        build.Append(reader.Value + "\n");
-                    break;
-                    case XmlNodeType.Text:
-                        build.Append(reader.Value);
-                    break;
+            try {
+                StringBuilder build = new StringBuilder();
+                XmlTextReader reader = new XmlTextReader(FileXmlPath);
+
+                while(reader.Read()) {
+                    switch(reader.NodeType) {
+                        case XmlNodeType.Element:
+                            build.Append(reader.Value + "\n");
+                            break;
+                        case XmlNodeType.Text:
+                            build.Append(reader.Value);
+                            break;
+                    }
                 }
-            }
 
-            text.Text = build.ToString();
+                text.Text = build.ToString();
+            } catch (FileNotFoundException ex) {
+                MessageBox.Show("Tiedosto ei löytynyt: " + FileXmlPath);
+            }
+            
         }
 
         //creates and writes xml file from given string
         public void WriteXML(HashSet<string> randString) {
 
             if(canWrite == true) {
+
+                XDocument doc = new XDocument();
+
+                //create root element
+                XElement xRoot = new XElement("root");
+                doc.Add(xRoot);
+
+                //loop hashset strings and add each string in new element
+                foreach(var str in randString) {
+                    XElement ele = new XElement("string", str);
+                    xRoot.Add(ele);
+                }
+
                 if(File.Exists(FileXmlPath)) {
                     MessageBoxResult result = MessageBox.Show("Tiedosto " + FileXmlPath + " on olemassa. Ylikirjoitetaanko?", "Kirjoita tiedostoon pointcollege", MessageBoxButton.YesNo);
 
                     if(result == MessageBoxResult.Yes) {
                         //create new xml file
-                        XDocument doc = new XDocument();
 
-                        //create root element
-                        XElement xRoot = new XElement("root");
-                        doc.Add(xRoot);
-
-                        //loop hashset strings and add each string in new element
-                        foreach(var str in randString) {
-                            XElement ele = new XElement("string", str);
-                            xRoot.Add(ele);
-                        }
 
                         //save xml file
                         doc.Save(FileXmlPath);
                     } else {
                         return;
                     }
+                   
+                } else {
+                    doc.Save(FileXmlPath);
                 }
+
             } 
         }
 
@@ -135,14 +153,20 @@ namespace _4loopsAppWpf {
 
         //reads from json
         public void ReadJson() {
-            StreamReader reader = new StreamReader(FileJsonPath);
 
-            string json = reader.ReadToEnd();
-            dynamic array = JsonConvert.DeserializeObject(json);
+            try {
+                StreamReader reader = new StreamReader(FileJsonPath);
 
-            foreach(var item in array) {
-                text.Text = (string)item.ToString();
+                string json = reader.ReadToEnd();
+                dynamic array = JsonConvert.DeserializeObject(json);
+
+                foreach(var item in array) {
+                    text.Text = (string)item.ToString();
+                }
+            } catch (FileNotFoundException e) {
+                MessageBox.Show("Tiedostoa ei löytynyt " + FileJsonPath);
             }
+            
         }
 
         public void ReadFromLocation(string filename) {
