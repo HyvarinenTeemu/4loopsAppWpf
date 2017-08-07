@@ -10,14 +10,18 @@
         <Button x:Name="button" Content="Käännä" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="20,17,0,0" Click="button_Click"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Sana" VerticalAlignment="Top" Width="120" Margin="138,17,0,0" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Margin="277,19,0,0"/>
-        <CheckBox x:Name="checkBox" Content="Kirjoita teksti / xml" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
-        <CheckBox x:Name="checkBox1" Content="Lue tiedostosta" HorizontalAlignment="Left" Margin="320,30,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox1_Checked" Unchecked="checkBox1_Unchecked"/>
-        <CheckBox x:Name="checkBox2" Content="Lue XML tiedosto" HorizontalAlignment="Left" Margin="320,50,0,0" VerticalAlignment="Top" Width="119" Checked="checkBox2_Checked" Unchecked="checkBox2_Unchecked"/>
-        <CheckBox x:Name="checkBox3" Content="Lue Json tiedosto" HorizontalAlignment="Left" Margin="320,70,0,0" VerticalAlignment="Top" Width="139" Checked="checkBox3_Checked" Unchecked="checkBox3_Unchecked"/>
+        <CheckBox x:Name="checkBox" Content="Kirjoita .txt / .xml / .json" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Width="168" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
+        <CheckBox x:Name="checkBox1" Content="Lue tiedostosta" HorizontalAlignment="Left" Margin="320,30,0,0" VerticalAlignment="Top" Width="168" Checked="checkBox1_Checked" Unchecked="checkBox1_Unchecked"/>
+        <CheckBox x:Name="checkBox2" Content="Lue XML tiedosto" HorizontalAlignment="Left" Margin="320,50,0,0" VerticalAlignment="Top" Width="168" Checked="checkBox2_Checked" Unchecked="checkBox2_Unchecked"/>
+        <CheckBox x:Name="checkBox3" Content="Lue Json tiedosto" HorizontalAlignment="Left" Margin="320,70,0,0" VerticalAlignment="Top" Width="168" Checked="checkBox3_Checked" Unchecked="checkBox3_Unchecked"/>
         <Button x:Name="button1" Content="Selaa" HorizontalAlignment="Left" Margin="320,106,0,0" VerticalAlignment="Top" Width="75" Click="button1_Click"/>
         <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="23" Margin="138,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="177"/>
         <Button x:Name="button2" Content="Lue" HorizontalAlignment="Left" Margin="20,68,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="263" Margin="10,146,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="239" Margin="10,170,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="497" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
+        <Label x:Name="label" Content="Tekstiä parsittu:" HorizontalAlignment="Left" Margin="20,93,0,0" VerticalAlignment="Top" Width="94" Height="33"/>
+        <Label x:Name="label1" Content="Aika                 :" HorizontalAlignment="Left" Margin="20,126,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.075,0.237" Width="94"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="138,98,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="145"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="138,131,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="145"/>
 
     </Grid>
 </Window>

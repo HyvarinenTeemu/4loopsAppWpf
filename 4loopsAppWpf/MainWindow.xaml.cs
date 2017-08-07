@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
+using System.Windows.Threading;
 
 namespace _4loopsAppWpf {
     /// <summary>
@@ -26,21 +28,29 @@ namespace _4loopsAppWpf {
         public MainWindow() {
             InitializeComponent();
             
-            readWrite = new ReadWrite(textBox1, textBox, textBox2, checkBox, checkBox1, checkBox2, checkBox3, button);
-            readWrite.FilePath = @"C:\Temp\write.txt";
-            readWrite.FileXmlPath = @"c:\Temp\xmldocs.xml";
-            readWrite.FileJsonPath = @"c:\Temp\jsondocs.json";
+            readWrite = new ReadWrite(textBox1, textBox, textBox2, checkBox, checkBox1, checkBox2, checkBox3, button, textBlock1, textBlock2);
+            readWrite.FilePath = @"C:\Temp\writetext.txt";
+            readWrite.FileXmlPath = @"c:\Temp\writexml.xml";
+            readWrite.FileJsonPath = @"c:\Temp\writejson.json";
         }
 
         private void button_Click(object sender, RoutedEventArgs e) {
 
-            //read from file if checkbox for write is disabled
+            //read txt file created
             if(!checkBox.IsEnabled && !checkBox2.IsEnabled && !checkBox3.IsEnabled) {
                 readWrite.Read();
+
+            //read xml file created
             } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled && !checkBox3.IsEnabled) {
                 readWrite.ReadXML();
+
+            //rad json created
             } else if(!checkBox.IsEnabled && !checkBox1.IsEnabled && !checkBox2.IsEnabled) {
+                readWrite.StartTimerForUpdateFilesCount();
                 readWrite.ReadJson();
+
+            //generates text from given string
+            //if first checkbox is checked this will also write to file
             } else {
             
                 //at first delete any content before starting new one
@@ -106,14 +116,19 @@ namespace _4loopsAppWpf {
                 //add number how many unique strings comes from given output
                 textBlock.Text = totalCount.ToString();
 
-                //write output to txt file
-                readWrite.Write(readWrite.FilePath, textBox1.Text);
+                //check if writing to files to disk is true then run this block
+                if(readWrite.WriteToFile == true) {
+                    string looptimes = Interaction.InputBox("Kuinka monta kertaa kirjoitetaan?", "Tiedostoon kirjoitus", "1");
 
-                //create and write xml from output
-                readWrite.WriteXML(randString);
+                    //write output to txt file
+                    readWrite.Write(readWrite.FilePath, textBox1.Text, looptimes);
 
-                //write json
-                readWrite.WriteJson(randString);
+                    //create and write xml from output
+                    readWrite.WriteXML(randString, looptimes);
+
+                    //write json
+                    readWrite.WriteJson(randString, looptimes);
+                }
             }
         }
           
@@ -205,6 +220,7 @@ namespace _4loopsAppWpf {
             textBox.IsEnabled = true;
         }
 
+        //button for opening file system to search files
         private void button1_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog dialog = new OpenFileDialog();
 
@@ -230,7 +246,9 @@ namespace _4loopsAppWpf {
             }
         }
 
+        //send selected file to readfromlocation method
         private void button2_Click(object sender, RoutedEventArgs e) {
+            readWrite.StartTimerForUpdateFilesCount();
             readWrite.ReadFromLocation(filename);
         }
     }
